@@ -1,0 +1,95 @@
+après création fichier : 
+1-
+
+npm init -y
+npm install express sqlite3
+
+
+2-node server.js
+
+
+
+3-ouvrir navigateur : 
+http://localhost:3000
+
+
+4-creation de la base de données : 
+
+Here are simple, practical ways to create an SQLite database, depending on how you want to do it.
+
+✅ Option 1: Create SQLite Database with Node.js (Recommended for JS)
+1️⃣ Install sqlite3
+npm install sqlite3
+
+2️⃣ Create Database File (JavaScript)
+const sqlite3 = require("sqlite3").verbose();
+
+// Creates database.db if it does not exist
+const db = new sqlite3.Database("database.db", (err) => {
+  if (err) {
+    console.error(err.message);
+  } else {
+    console.log("SQLite database created / opened.");
+  }
+});
+
+
+📁 This creates a file:
+
+database.db
+
+3️⃣ Create a Table
+db.run(`
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE
+  )
+`);
+
+✅ Option 2: Create SQLite Database Using Command Line
+1️⃣ Open terminal
+sqlite3 mydatabase.db
+
+
+This immediately creates the file.
+
+2️⃣ Create Table
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT,
+  email TEXT
+);
+
+
+Exit:
+
+.exit
+
+✅ Option 3: Create SQLite Database with DB Browser (GUI)
+
+Download DB Browser for SQLite
+
+Click New Database
+
+Save as database.db
+
+Create tables visually
+
+📌 Verify Database
+Command Line
+sqlite3 database.db
+.tables
+
+JavaScript
+db.all("SELECT * FROM users", (err, rows) => {
+  console.log(rows);
+});
+
+❓Common Mistakes
+
+❌ Trying to create SQLite directly from browser JS
+❌ Forgetting PRIMARY KEY
+❌ Not closing database when done
+
+🎯 What Next?
